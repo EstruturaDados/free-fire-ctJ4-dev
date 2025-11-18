@@ -21,7 +21,6 @@ void mostrarMenu();
 void adicionarItem(struct mochila *m, char *nome, int quantidade);
 void removerItem(struct mochila *m, char *nome, int quantidade);
 void mostrarInventario(struct mochila *m);
-void checarPeso(struct mochila *m, int quantidade); // Verica se a mochila está cheia
 void liberarMochila(struct mochila *m); // Função para liberar memória alocada
 
 // Função principal
@@ -35,28 +34,29 @@ int main () {
     printf("Você está caindo, nas suas costas uma mochila e preso a ela, uma corda\n");
     printf("VOCÊ PUXA, E REZA!\n");
     printf("=============================\n");
-    printf("Backpack Simulator - By Pedro");
+    printf("Backpack Simulator - By Pedro\n");
     printf("=============================\n");
     printf("Você pousou em segurança, e sente uma vontade incontrolável de preencher sua mochila.\n");
 
     do {
         mostrarMenu();
-        mostrarMenu();
         printf("O que deseja fazer? ");
         scanf("%d", &escolha);
+        getchar(); // Consome o newline deixado pelo scanf
 
         switch (escolha) {
             case 1:
                 printf("Digite o nome do item a ser adicionado: ");
-                scanf("%s", nome);
+                fgets(nome, MAX_STRING, stdin);
+                nome[strcspn(nome, "\n")] = 0;
                 printf("Digite a quantidade: ");
                 scanf("%d", &quantidade);
                 adicionarItem(minhaMochila, nome, quantidade);
-                checarPeso(minhaMochila, quantidade);
                 break;
             case 2:
                 printf("Digite o nome do item a ser removido: ");
-                scanf("%s", nome);
+                fgets(nome, MAX_STRING, stdin);
+                nome[strcspn(nome, "\n")] = 0;
                 printf("Digite a quantidade: ");
                 scanf("%d", &quantidade);
                 removerItem(minhaMochila, nome, quantidade);
@@ -103,7 +103,6 @@ void adicionarItem(struct mochila *m, char *nome, int quantidade) {
         printf("%d %ss adicionados à mochila.\n", quantidade, nome);
     else
         printf("%d %s adicionado à mochila.\n", quantidade, nome);
-        checarPeso(m, quantidade);
 }
 
 // Função para remover item da mochila
@@ -145,13 +144,6 @@ void mostrarInventario(struct mochila *m) {
         printf("| %-42s |\n", "Mochila vazia.");
     }
     printf("=======================================================\n");
-}
-
-// Função para checar quantidade de itens na mochila
-void checarPeso(struct mochila *m, int quantidade) {
-    if (m->itemCount == MAX_ITEMS) {
-        printf("\nATENÇÃO!!! Sua mochila está pesada, talvez seja a hora de remover alguns itens.\n");
-    }
 }
 
 // Função para liberar memória alocada
