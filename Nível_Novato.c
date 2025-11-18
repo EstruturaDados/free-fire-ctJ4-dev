@@ -32,13 +32,15 @@ int main () {
     int escolha, quantidade;
     char nome[MAX_STRING];
 
+    printf("Você está caindo, nas suas costas uma mochila e preso a ela, uma corda\n");
+    printf("VOCÊ PUXA, E REZA!\n");
+    printf("=============================\n");
+    printf("Backpack Simulator - By Pedro");
+    printf("=============================\n");
+    printf("Você pousou em segurança, e sente uma vontade incontrolável de preencher sua mochila.\n");
+
     do {
-        printf("Você está caindo, nas suas costas uma mochila e preso a ela, uma corda\n");
-        printf("VOCÊ PUXA, E REZA!\n");
-        printf("=============================\n");
-        printf("Backpack Simulator - By Pedro");
-        printf("=============================\n");
-        printf("Você pousou em segurança, e sente uma vontade incontrolável de preencher sua mochila.\n");
+        mostrarMenu();
         mostrarMenu();
         printf("O que deseja fazer? ");
         scanf("%d", &escolha);
